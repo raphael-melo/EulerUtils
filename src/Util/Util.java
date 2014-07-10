@@ -18,6 +18,7 @@ public class Util {
 //				if(!isNotPrime[firstPrime-2]){
 				if(!notPrimes.contains(firstPrime)){
 					primes.add(firstPrime);
+//					System.out.println(firstPrime);
 					break;
 				}
 			}
@@ -26,6 +27,34 @@ public class Util {
 //				isNotPrime[(firstPrime*i)-2] = true;
 			}
 			firstPrime++;
+		}
+		
+		return primes;
+	}
+	
+	public static List<Long> generateListOfPrimes2(Long limit) {
+		List<Long> primes = new ArrayList<Long>();
+		primes.add(2L);
+		
+		Long testingPrime = 2L;
+		testingPrime++;
+		while(testingPrime <= limit){
+			boolean test = true;
+			int sqrtAux = (int) Math.sqrt(testingPrime);
+			Long sqrtTp = new Long( sqrtAux);
+			for (Long prime : primes) {
+				if (prime > sqrtTp)
+					break;
+				if (testingPrime% prime == 0){
+					test = false;
+					break;
+				}
+			}
+			if (test){
+				System.out.println(testingPrime);
+				primes.add(testingPrime);
+			}
+			testingPrime+=2;
 		}
 		
 		return primes;
@@ -63,6 +92,15 @@ public class Util {
 		int result = 0;
 		for(int i = 1; i<= digits; i++ )
 			result = (result*10)+9;
+		return result;
+	}
+	
+	public static Long sumListOfLongs(List<Long> l){
+		Long result = 0L;
+		
+		for (Long long1 : l) {
+			result+=long1;
+		}
 		return result;
 	}
 }
